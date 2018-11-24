@@ -19,6 +19,7 @@ namespace Cwkbot.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseUrls("http://192.168.0.136:6215");
     }
 }

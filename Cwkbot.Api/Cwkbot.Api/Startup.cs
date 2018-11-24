@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -39,7 +40,10 @@ namespace Cwkbot.Api
             {
                 app.UseHsts();
             }
-
+            app.Use(async (context, next) => {
+                context.Request.Host = new HostString("192.168.0.136:6215");
+                await next();
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
         }
