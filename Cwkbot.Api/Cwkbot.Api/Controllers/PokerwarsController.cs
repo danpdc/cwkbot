@@ -1,5 +1,6 @@
 ﻿using Cwkbot.Api.Models.Dtos;
 using Cwkbot.Domain.Interfaces;
+using Cwkbot.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,10 +28,16 @@ namespace Cwkbot.Api.Controllers
 
         [HttpPost]
         [Route("play")]
-        public IActionResult Play([FromBody] string info)
+        public IActionResult Play([FromBody] HandInfo handInfo)
         {
-            string handInfo = info;
-            return Ok("{\"action\": \"fold\"}");
+            if (ModelState.IsValid)
+            {
+                var handEval = _pokerService.GetHandEvaluation(handInfo);
+                IPokerAction action = handEval.SuggestedAction;
+                return Ok(action);
+            }
+            else
+                return BadRequest();
         }
     }
 }

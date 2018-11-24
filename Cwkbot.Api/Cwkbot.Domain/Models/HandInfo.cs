@@ -13,13 +13,13 @@ namespace Cwkbot.Domain.Models
         {
             SmallBlind = smallBlind;
             BigBlind = bigBlind;
-            PlayerCards = playerCards;
+            YourCards = playerCards;
             TableCards = tableCards;
             Players = players;
         }
         public int SmallBlind { get; set; }
         public int BigBlind { get; set; }
-        public List<Card> PlayerCards { get; set; }
+        public List<Card> YourCards { get; set; }
         public List<Card> TableCards { get; set; }
         public List<Player> Players { get; set; }
         public HandStage Stage => GetHandStage();
