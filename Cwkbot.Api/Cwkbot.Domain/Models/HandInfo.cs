@@ -7,11 +7,23 @@ namespace Cwkbot.Domain.Models
 {
     public class HandInfo
     {
+
+        public HandInfo(int smallBlind, int bigBlind, List<Card> playerCards,
+            List<Card> tableCards, List<Player> players)
+        {
+            SmallBlind = smallBlind;
+            BigBlind = bigBlind;
+            PlayerCards = playerCards;
+            TableCards = tableCards;
+            Players = players;
+        }
         public int SmallBlind { get; set; }
         public int BigBlind { get; set; }
         public List<Card> PlayerCards { get; set; }
         public List<Card> TableCards { get; set; }
         public List<Player> Players { get; set; }
+        public HandStage Stage => GetHandStage();
+        public int PotSize => GetPotSize();
 
         public HandStage GetHandStage()
         {

@@ -1,4 +1,5 @@
 ﻿using Cwkbot.Api.Models.Dtos;
+using Cwkbot.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,10 @@ namespace Cwkbot.Api.Controllers
     [Route("pokerwars.io")]
     public class PokerwarsController : Controller
     {
-        public PokerwarsController()
+        IPokerService _pokerService;
+        public PokerwarsController(IPokerService pokerService)
         {
-
+            _pokerService = pokerService;
         }
 
         [HttpGet]
