@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Cwkbot.Domain.Models.Actions
 {
-    public class Bet : IPokerBetAction
+    public class Raise : IPokerAction
     {
-        private const string BET = "bet";
-        public Bet()
+        private const string RAISE = "raise";
+        public Raise()
         {
-            Action = BET;
+            Action = RAISE;
         }
-        public string Action { get; private set; }
+        public string Action { get; }
         public int Chips { get; set; }
     }
 }

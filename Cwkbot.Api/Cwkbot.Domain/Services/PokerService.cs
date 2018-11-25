@@ -18,6 +18,8 @@ namespace Cwkbot.Domain.Services
             var suggestedAction = strategy.Evaluate();
             if (suggestedAction == null)
                 he.SuggestedAction = new Fold();
+            else
+                he.SuggestedAction = suggestedAction;
             return he;
         }
     }

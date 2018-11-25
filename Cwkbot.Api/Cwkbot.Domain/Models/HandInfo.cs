@@ -8,6 +8,10 @@ namespace Cwkbot.Domain.Models
     public class HandInfo
     {
 
+        public HandInfo()
+        {
+
+        }
         public HandInfo(int smallBlind, int bigBlind, List<Card> playerCards,
             List<Card> tableCards, List<Player> players)
         {

@@ -6,6 +6,6 @@ namespace Cwkbot.Domain.Interfaces
 {
     public interface IPokerAction
     {
-        string Action { get; set; }
+        string Action { get; }
     }
 }

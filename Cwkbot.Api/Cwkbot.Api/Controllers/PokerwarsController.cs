@@ -1,6 +1,7 @@
 ﻿using Cwkbot.Api.Models.Dtos;
 using Cwkbot.Domain.Interfaces;
 using Cwkbot.Domain.Models;
+using Cwkbot.Domain.Models.Actions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,16 +29,17 @@ namespace Cwkbot.Api.Controllers
 
         [HttpPost]
         [Route("play")]
-        public IActionResult Play([FromBody] HandInfo handInfo)
+        public IActionResult Play([FromBody] HandInfoDto handInfo)
         {
             if (ModelState.IsValid)
             {
-                var handEval = _pokerService.GetHandEvaluation(handInfo);
+                HandInfo currentHand = handInfo.GenerateHandInfoModel(handInfo);
+                var handEval = _pokerService.GetHandEvaluation(currentHand);
                 IPokerAction action = handEval.SuggestedAction;
                 return Ok(action);
             }
             else
-                return BadRequest();
+                return Ok(new Fold());
         }
     }
 }

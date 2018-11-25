@@ -1,5 +1,6 @@
 ﻿using Cwkbot.Domain.Interfaces;
 using Cwkbot.Domain.Models;
+using Cwkbot.Domain.Models.Actions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Cwkbot.Domain.Services.Strategies
         }
         public IPokerAction Evaluate()
         {
-            return null;
+            return new Call();
         }
     }
 }

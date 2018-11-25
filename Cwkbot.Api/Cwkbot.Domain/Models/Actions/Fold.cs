@@ -12,6 +12,6 @@ namespace Cwkbot.Domain.Models.Actions
         {
             Action = FOLD;
         }
-        public string Action { get; set; }
+        public string Action { get; private set; }
     }
 }

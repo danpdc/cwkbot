@@ -7,6 +7,11 @@ namespace Cwkbot.Domain.Models.Actions
 {
     public class Call : IPokerAction
     {
-        public string Action { get; set; }
+        private const string CALL = "call";
+        public Call()
+        {
+            Action = CALL;
+        }
+        public string Action { get;  private set; }
     }
 }
