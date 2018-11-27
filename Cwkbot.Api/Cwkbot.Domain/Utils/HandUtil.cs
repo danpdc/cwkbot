@@ -41,6 +41,71 @@ namespace Cwkbot.Domain.Utils
             }
             return new Tuple<bool, int>(hasTwoPairs, sum);
         }
+
+        public static Tuple<bool, int> IsThreeOfAKind(List<Card> cards)
+        {
+            var hasThreeOfAKind = cards.GroupBy(card => card.Rank)
+                                            .Any(group => group.Count() == 3);
+            int sum = 0;
+            if (hasThreeOfAKind)
+            {
+                var three = cards.GroupBy(card => card.Rank);
+                foreach (var key in three)
+                {
+                    var keyArray = key.ToArray();
+                    if (keyArray.Length == 3)
+                        sum = (int)keyArray[0].Rank + (int)keyArray[1].Rank + (int)keyArray[2].Rank;
+                }
+            }
+            return new Tuple<bool, int>(hasThreeOfAKind, sum);
+        }
+
+        public static bool IsStraight(List<Card> cards)
+        {
+            var hasStraight = cards.GroupBy(card => card.Rank)
+                                            .Count() == cards.Count()
+                                       && cards.Max(card => (int)card.Rank)
+                                        - cards.Min(card => (int)card.Rank) == 4;
+            return hasStraight;
+        }
+
+        public static Tuple<bool, int> IsFlush(List<Card> cards)
+        {
+            var grouped = cards.GroupBy(card => card.Suit);
+            bool hasflush = false;
+            int highCard = 0;
+            foreach (var group in grouped)
+            {
+                var groupArray = group.ToArray();
+                if (groupArray.Length >= 5)
+                {
+                    hasflush = true;
+                    for (int i = 0; i < groupArray.Length; i++)
+                    {
+                        if ((int)groupArray[i].Rank > highCard)
+                            highCard = (int)groupArray[i].Rank;
+                    }
+                }
+            }
+            return new Tuple<bool, int>(hasflush, highCard);
+        }
+
+        public static bool IsFourOfAKind(List<Card> cards)
+        {
+            var hasFourOfAKind = cards.GroupBy(card => card.Rank)
+                                            .Any(group => group.Count() == 4);
+            return hasFourOfAKind;
+        }
+
+        public static bool IsFullHouse(List<Card> cards)
+        {
+            var hasPair = IsPair(cards);
+            var hasThreeOfAKind = IsThreeOfAKind(cards);
+            if (hasPair.Item1 == true && hasThreeOfAKind.Item1 == true)
+                return true;
+            else
+                return false;
+        }
         public static List<IPokerAction> GetPokerActions(HandInfo hand)
         {
             List<IPokerAction> actions = new List<IPokerAction>();

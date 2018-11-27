@@ -71,8 +71,6 @@ namespace Cwkbot.Domain.Services.Strategies
                     return new Fold();
             }
             return new Fold();
-        }
-
-        
+        } 
     }
 }
